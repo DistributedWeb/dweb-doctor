@@ -1,24 +1,24 @@
 {
-  "name": "dat-doctor",
-  "version": "2.1.2",
-  "description": "Dat network doctor extension",
+  "name": "dweb-doctor",
+  "version": "1.0.0",
+  "description": "Network doctor for dWeb",
   "main": "index.js",
   "scripts": {
     "test": "standard && npm run test-deps",
     "test-deps": "dependency-check . && dependency-check . --extra --no-dev"
   },
   "bin": {
-    "dat-doctor": "cli.js"
+    "dweb-doctor": "cli.js"
   },
   "author": "Dat Project",
   "license": "BSD-3-Clause",
   "repository": "datproject/dat-doctor",
   "dependencies": {
     "chalk": "^2.3.2",
-    "dat-swarm-defaults": "^1.0.1",
+    "dweb-swarm-defaults": "^1.0.0",
     "debug": "^4.1.1",
-    "discovery-swarm": "^5.1.2",
-    "dns-discovery": "^6.1.0",
+    "dweb-discovery-swarm": "^1.0.0",
+    "dweb-dns-discovery": "^1.0.0",
     "menu-string": "^1.2.0",
     "minimist": "^1.2.0",
     "neat-log": "^3.1.0",
