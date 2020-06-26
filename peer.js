@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-// this is the peer at 'doctor1.publicbits.org'
+// this is the peer at 'doctor1.dwebx.net'
 
-var swarm = require('discovery-swarm')
+var swarm = require('dweb-discovery-swarm')
 var crypto = require('crypto')
 var pump = require('pump')
-var defaults = require('dat-swarm-defaults')()
+var defaults = require('dweb-swarm-defaults')()
 
 var sw = swarm({
   dns: {
@@ -18,9 +18,9 @@ var sw = swarm({
 sw.on('error', function () {
   sw.listen(0)
 })
-sw.listen(8887)
+sw.listen(6620)
 sw.on('listening', function () {
-  sw.join('dat-doctor-public-peer')
+  sw.join('dweb-doctor-public-peer')
   sw.on('connecting', function (peer) {
     console.log('Trying to connect to %s:%d', peer.host, peer.port)
   })

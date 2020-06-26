@@ -6,19 +6,19 @@ var output = require('neat-log/output')
 var neatTasks = require('neat-tasks')
 var chalk = require('chalk')
 var Menu = require('menu-string')
-// var debug = require('debug')('dat-doctor')
+// var debug = require('debug')('dweb-doctor')
 var defaultTasks = require('./lib/tasks-default')
 var peerTasks = require('./lib/tasks-peer')
 var peerTest = require('./lib/peer-test')
 
 var NODE_VER = process.version
 var DOCTOR_VER = require('./package.json').version
-var DAT_PROCESS = process.title === 'dat'
+var DAT_PROCESS = process.title === 'dweb'
 
 module.exports = function (opts) {
   if (!opts) opts = {}
   opts.peerId = opts.peerId || null
-  opts.port = typeof opts.port === 'number' ? opts.port : 3282
+  opts.port = typeof opts.port === 'number' ? opts.port : 6620
 
   var views = [headerOutput, versionsOutput, menuView]
   var neat = neatLog(views)
@@ -27,7 +27,7 @@ module.exports = function (opts) {
   if (opts.peerId) return runP2P() // run p2p tests right away
 
   var menu = Menu([
-    'Basic Tests (Checks your Dat installation and network setup)',
+    'Basic Tests (Checks your DWeb installation and network setup)',
     'Peer-to-Peer Test (Debug connections between two computers)'
   ])
   neat.use(function (state) {
@@ -79,8 +79,8 @@ module.exports = function (opts) {
           ${chalk.bold.redBright('FAIL')}
           ${testCountMsg}
 
-          Your network may be preventing you from using Dat.
-          For further troubleshooting, visit https://docs.datproject.org/troubleshooting
+          Your network may be preventing you from using DWeb.
+          For further troubleshooting, visit https://docs.dwebx.org/troubleshooting
         `))
         process.exit(1)
       })
@@ -118,7 +118,7 @@ module.exports = function (opts) {
   }
 
   function headerOutput (state) {
-    return `Welcome to ${chalk.greenBright('Dat')} Doctor!\n`
+    return `Welcome to ${chalk.greenBright('DWeb')} Doctor!\n`
   }
 
   function menuView (state) {
@@ -145,31 +145,31 @@ module.exports = function (opts) {
       Software Info:
         ${os.platform()} ${os.arch()}
         Node ${version.node}
-        Dat Doctor v${version.doctor}
+        DWeb Doctor v${version.doctor}
         ${datVer()}
     `) + '\n'
 
     function datVer () {
-      if (!DAT_PROCESS || !version.dat) return ''
-      return chalk.green(`dat v${version.dat}`)
+      if (!DAT_PROCESS || !version.dweb) return ''
+      return chalk.green(`dweb v${version.dweb}`)
     }
   }
 
   function getVersions (state, bus) {
     state.versions = {
-      dat: null,
+      dweb: null,
       doctor: DOCTOR_VER,
       node: NODE_VER
     }
-    exec('dat -v', function (err, stdin, stderr) {
+    exec('dweb -v', function (err, stdin, stderr) {
       if (err && err.code === 127) {
-        // Dat not installed/executable
+        // DWeb not installed/executable
         state.datInstalled = false
         return bus.emit('render')
       }
       // if (err) return bus.emit('render')
-      // TODO: right now dat -v exits with error code, need to fix
-      state.versions.dat = stderr.toString().split('\n')[0].trim()
+      // TODO: right now dweb -v exits with error code, need to fix
+      state.versions.dweb = stderr.toString().split('\n')[0].trim()
       bus.emit('render')
     })
   }

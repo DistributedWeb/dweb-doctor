@@ -10,9 +10,9 @@
   "bin": {
     "dweb-doctor": "cli.js"
   },
-  "author": "Dat Project",
+  "author": "DWeb Project",
   "license": "BSD-3-Clause",
-  "repository": "datproject/dat-doctor",
+  "repository": "datproject/dweb-doctor",
   "dependencies": {
     "chalk": "^2.3.2",
     "dweb-swarm-defaults": "^1.0.0",
